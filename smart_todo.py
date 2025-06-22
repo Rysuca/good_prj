@@ -76,7 +76,7 @@ class SmartTodoList:
         with open(self.filename, "w") as f:
             json.dump(self.tasks, f, indent=2)
     
-def load_tasks(self):
+    def load_tasks(self):
         """Загрузка задач из файла"""
         if os.path.exists(self.filename):
             with open(self.filename) as f:
