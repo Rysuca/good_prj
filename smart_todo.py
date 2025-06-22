@@ -35,3 +35,8 @@ class SmartTodoList:
                 self.save_tasks()
                 return True
         return False
+
+    def get_pending_tasks(self):
+        """Получение списка активных задач"""
+        return [task for task in self.tasks if not task["completed"]]
+    
