@@ -71,5 +71,10 @@ class SmartTodoList:
         return [task for task in self.get_pending_tasks() 
                if task["due_date"] and datetime.fromisoformat(task["due_date"]) <= cutoff]
 
+    def save_tasks(self):
+        """Сохранение задач в файл"""
+        with open(self.filename, "w") as f:
+            json.dump(self.tasks, f, indent=2)
+    
 
     
