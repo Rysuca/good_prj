@@ -10,3 +10,17 @@ class SmartTodoList:
         self.tasks = []
         self.load_tasks()
         
+    def add_task(self, title, category="general", priority=3, due_date=None):
+        """Добавление новой задачи"""
+        task = {
+            "id": len(self.tasks) + 1,
+            "title": title,
+            "category": category,
+            "priority": priority,  # 1: highest, 5: lowest
+            "due_date": due_date,
+            "created": datetime.now().isoformat(),
+            "completed": False
+        }
+        self.tasks.append(task)
+        self.save_tasks()
+        return task
