@@ -76,5 +76,33 @@ class SmartTodoList:
         with open(self.filename, "w") as f:
             json.dump(self.tasks, f, indent=2)
     
+def load_tasks(self):
+        """Загрузка задач из файла"""
+        if os.path.exists(self.filename):
+            with open(self.filename) as f:
+                self.tasks = json.load(f)
+
+# Пример использования (демо)
+if __name__ == "__main__":
+    todo = SmartTodoList()
+    
+    # Добавление тестовых задач
+    todo.add_task("Купить молоко", "покупки", 2)
+    todo.add_task("Сделать упражнения", "здоровье", 1)
+    todo.add_task("Прочитать книгу", "образование", 4, 
+                 (datetime.now() + timedelta(days=3)).isoformat())
+    
+    # Завершение задачи
+    todo.complete_task(1)
+    
+    # Аналитика
+    print("Предстоящие дедлайны:")
+    for task in todo.upcoming_deadlines():
+        print(f"- {task['title']} (Приоритет: {task['priority']})")
+    
+    print("\nАнализ привычек:")
+    stats = todo.analyze_habits()
+    print(f"Всего выполнено: {stats['total_completed']}")
+    print("По категориям:", dict(stats["categories"]))
 
     
