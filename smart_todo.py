@@ -24,3 +24,14 @@ class SmartTodoList:
         self.tasks.append(task)
         self.save_tasks()
         return task
+
+    
+    def complete_task(self, task_id):
+        """Отметка задачи как выполненной"""
+        for task in self.tasks:
+            if task["id"] == task_id:
+                task["completed"] = True
+                task["completed_at"] = datetime.now().isoformat()
+                self.save_tasks()
+                return True
+        return False
