@@ -43,4 +43,26 @@ class SmartTodoList:
      def get_completed_tasks(self):
         """Получение списка выполненных задач"""
         return [task for task in self.tasks if task["completed"]]
+
+    def analyze_habits(self, days=30):
+        """Анализ привычек за указанный период"""
+        cutoff = datetime.now() - timedelta(days=days)
+        completed = [t for t in self.get_completed_tasks() 
+                    if datetime.fromisoformat(t["completed_at"]) > cutoff]
+        
+        stats = {
+            "total_completed": len(completed),
+            "categories": defaultdict(int),
+            "daily_completion": defaultdict(int),
+            "priority_distribution": defaultdict(int)
+        }
+        
+        for task in completed:
+            stats["categories"][task["category"]] += 1
+            day = datetime.fromisoformat(task["completed_at"]).strftime("%Y-%m-%d")
+            stats["daily_completion"][day] += 1
+            stats["priority_distribution"][task["priority"]] += 1
+            
+        return stats
+
     
