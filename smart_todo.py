@@ -65,4 +65,11 @@ class SmartTodoList:
             
         return stats
 
+    def upcoming_deadlines(self, days=7):
+        """Получение предстоящих дедлайнов"""
+        cutoff = datetime.now() + timedelta(days=days)
+        return [task for task in self.get_pending_tasks() 
+               if task["due_date"] and datetime.fromisoformat(task["due_date"]) <= cutoff]
+
+
     
